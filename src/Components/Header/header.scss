@@ -1,0 +1,32 @@
+$mainColor: darkcyan;
+
+
+.header {
+    nav {
+        width: 1200px;
+        height: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    &_linkList {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        padding-left: 0;
+        &-item {
+            font-size: 18px;
+            color: $mainColor;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        &-activeItem {
+            color: violet;
+            text-decoration: none;
+        }
+    }
+}
+
+
+
