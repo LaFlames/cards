@@ -1,9 +1,10 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {loginReducer} from "../Components/Login/login-reducer";
-import {passwordRecoveryReducer} from "../Components/PasswordRecovery/password-reducer";
 import {profileReducer} from "../Components/Profile/profile-reducer";
 import {registrationReducer} from "../Components/Registration/registration-reducer";
+import {passwordRecoveryReducer} from "../Components/PasswordRecovery/passwordRecovery-reducer";
+import {enterNewPasswordReducer} from "../Components/EnterNewPassword/enterNewPassword-reducer";
 
 
 
@@ -12,8 +13,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     registration: registrationReducer,
     profile: profileReducer,
-    password: passwordRecoveryReducer,
-
+    passwordRecovery: passwordRecoveryReducer,
+    enterNewPassword: enterNewPasswordReducer
 })
 
 

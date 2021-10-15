@@ -3,10 +3,10 @@ $mainColor: darkcyan;
 
 .header {
     nav {
+        margin: 0 auto 30px auto;
         width: 1200px;
         height: 30px;
         border-radius: 10px;
-        margin-bottom: 30px;
     }
     &_linkList {
         display: flex;

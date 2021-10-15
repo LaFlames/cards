@@ -9,9 +9,6 @@ export const Header = () => {
             <nav>
                 <ul className={"header_linkList"}>
                     <li>
-                        <NavLink to={PATH.TEST} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Test</NavLink>
-                    </li>
-                    <li>
                         <NavLink to={PATH.LOGIN} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Login</NavLink>
                     </li>
                     <li>
@@ -22,6 +19,9 @@ export const Header = () => {
                     </li>
                     <li>
                         <NavLink to={PATH.PASSWORD_RECOVERY} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Password recovery</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={PATH.ENTER_NEW_PASSWORD} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Enter new password</NavLink>
                     </li>
                 </ul>
             </nav>
