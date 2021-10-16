@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// test
 
 export const Registration = () => {
     return (
