@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
 
 .login {
+  position: relative;
   width: 350px;
   height: 500px;
   margin: 0 auto;
@@ -18,6 +19,7 @@
     font-size: 22px;
     line-height: 33px;
     color: #2D2E46;
+    margin-top: 0;
     margin-bottom: 32px;
   }
   &_emailInput {
@@ -40,7 +42,7 @@
     }
   }
   &_forgetPassword {
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: 95px;
     font-size: 14px;
     line-height: 17px;
@@ -68,5 +70,15 @@
     font-size: 16px;
     line-height: 24px;
     color: #21268F;
+  }
+  &_loading {
+    position: absolute;
+    top: 46%;
+  }
+  &_errorMessage {
+    position: absolute;
+    top: 46%;
+    color: red;
+    font-size: 15px;
   }
 }
