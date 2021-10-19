@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import st from './Registration.module.css'
 import {SuperButton} from "../SuperComponents/SuperButton/SuperButton";
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {PATH} from "../Routes";
 import {useDispatch, useSelector} from "react-redux";
-import {regUser_TC, updateConfirmedPwVal, updateEmailVal, updatePasswordVal} from "./registration-reducer";
+import {isRegMode, regUser_TC, updateConfirmedPwVal, updateEmailVal, updatePasswordVal} from "./registration-reducer";
 import {SuperInputText} from "../SuperComponents/SuperInputText/SuperInputText";
 import {AppRootStateType} from "../../app/store";
 import {confirmPwValidation, eMailValidation, passWordValidation} from "./validator";
@@ -14,6 +14,7 @@ export const Registration = () => {
     const dispatch = useDispatch()
 
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.registration.isLoading)
+    const isReg = useSelector<AppRootStateType, boolean>(state => state.registration.isReg)
     const eMailValue = useSelector<AppRootStateType, string>(state => state.registration.email)
     const passWordValue = useSelector<AppRootStateType, string>(state => state.registration.password)
     const confirmedPassWordValue = useSelector<AppRootStateType, string>(state => state.registration.confirmedPass)
@@ -40,6 +41,10 @@ export const Registration = () => {
         } else {
             alert('Insert valid data')
         }
+    }
+
+    if (isReg) {
+        return <Redirect to={PATH.LOGIN}/>
     }
 
     return (

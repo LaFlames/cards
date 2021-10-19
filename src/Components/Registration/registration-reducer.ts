@@ -1,8 +1,9 @@
-import { Dispatch } from "redux"
+import {Dispatch} from "redux"
 import {regAPI} from "./regAPI";
 
 export type RegistrationInitialStateType = {
     isLoading: boolean
+    isReg: boolean
     email: string
     password: string
     confirmedPass: string
@@ -10,6 +11,7 @@ export type RegistrationInitialStateType = {
 
 const initialState: RegistrationInitialStateType = {
     isLoading: false,
+    isReg: false,
     email: '',
     password: '',
     confirmedPass: '',
@@ -29,13 +31,22 @@ export const registrationReducer = (state = initialState, action: ActionsType): 
         case 'REG/SET-LOADING-MODE': {
             return {...state, isLoading: action.isLoading}
         }
-        default: return state
+        case 'REG/SET-IS_REG-MODE': {
+            return {...state, isReg: action.isReg}
+        }
+        default:
+            return state
     }
 }
 
 export type LoadingMode_T = ReturnType<typeof loadingMode>
 export const loadingMode = (isLoading: boolean) => {
     return {type: 'REG/SET-LOADING-MODE', isLoading} as const
+}
+
+export type IsRegMode_T = ReturnType<typeof isRegMode>
+export const isRegMode = (isReg: boolean) => {
+    return {type: 'REG/SET-IS_REG-MODE', isReg} as const
 }
 
 export type UpdateConfirmedPwVal_T = ReturnType<typeof updateConfirmedPwVal>
@@ -57,18 +68,26 @@ type ActionsType = UpdateEmailVal_T
     | UpdatePassword_T
     | UpdateConfirmedPwVal_T
     | LoadingMode_T
+    | IsRegMode_T
 
 
 export const regUser_TC = (email: string, password: string) => (dispatch: Dispatch) => {
     dispatch(loadingMode(true))
-    regAPI.regUser(email, password)
+    regAPI.regUser({email, password})
         .then(res => {
-            console.log(res)
+            if (res.data) {
+                dispatch(isRegMode(true))
+            }
             dispatch(loadingMode(false))
         })
         .catch(err => {
-            console.log(err)
-            dispatch(loadingMode(false))
+            if (err.response) {
+                alert(err.response.data.error)
+                dispatch(loadingMode(false))
+            } else {
+                alert('Some Error has occurred, check your internet connection ')
+            }
+
         })
 }
 
