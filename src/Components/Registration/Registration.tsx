@@ -19,6 +19,12 @@ export const Registration = () => {
     const passWordValue = useSelector<AppRootStateType, string>(state => state.registration.password)
     const confirmedPassWordValue = useSelector<AppRootStateType, string>(state => state.registration.confirmedPass)
 
+    useEffect(() => {
+        return () => {
+            dispatch(isRegMode(false))
+        }
+    }, [])
+
     const onChangeEmailVal = (value: string) => {
         dispatch(updateEmailVal(value))
     }
