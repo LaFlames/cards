@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.registrationCardContainer {
+    display: flex;
+    justify-content: center;
+}
+.cardWrapper {
+    border: 1px solid green;
+    width: 300px;
+    min-height: 500px;
+    border-radius: 30px;
+    padding: 20px;
+}
+.dataContainer {
+    margin-top: 50px;
+}
+.dataInputBlock {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+.buttonContainer {
+    margin-top: 20px;
+}
+.validatorStyles {
+    color: red;
+}
