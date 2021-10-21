@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import s from './PasswordRecovery.module.css'
+import s from './PasswordRecovery.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStateType } from '../../app/store'
 import { SuperButton } from '../SuperComponents/SuperButton/SuperButton'
 import { SuperInputText } from '../SuperComponents/SuperInputText/SuperInputText'
 import { PasswordRecoveryInitialStateType, setEmailForPasswordTC, setErrorMessageAC, setIsPasswordRecoverySucceededAC, setPasswordRecoveryAC } from './passwordRecovery-reducer'
+import { NavLink } from 'react-router-dom'
+import { eMailValidation } from '../Registration/validator'
+import { SuccessfulMessage } from './SuccesfulMessage'
 
 
 
@@ -26,48 +29,46 @@ export const PasswordRecovery = () => {
         }
     }, [])
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setPasswordRecoveryAC(e.currentTarget.value))
+    const onChange = (value: string) => {
+        dispatch(setPasswordRecoveryAC(value))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        dispatch(setErrorMessageAC(''))
         e.preventDefault()
-        console.log(e.target)
-        dispatch(setEmailForPasswordTC(state))
+        if (eMailValidation(email) || email.length === 0) {
+            dispatch(setErrorMessageAC('Email address is not valide'))
+        } else {
+            dispatch(setEmailForPasswordTC(state))
+        }
     }
 
     if (isRequestSucceeded) {
-        return <div className={s.mainBlock}>
-            <p>Success!<br/>click the link in the message in your email</p>
-        </div>
+        return <SuccessfulMessage />
     }
 
     return (
         <div className={s.mainBlock}>
-            <div className={s.title}>
-                <h1>Forgot your password?</h1>
-            </div>
-
-            <div>
-            <div className={s.loading}>
-                {isLoading ? <span>loading</span> : errorMessage}
-            </div>
+            {isLoading && <span className={s.loading}>loading</span>}
+            <h2 className={s.title}>Forgot your password?</h2>
+            {errorMessage && <span className={s.errorMessage}>{errorMessage}</span>}
             <form onSubmit={handleSubmit}>
+                <div className={s.emailInput}>
                     <div>
-                        <SuperInputText type='email' placeholder='Email' onChange={onChange} value={email}/>
+                        <SuperInputText type='email' placeholder='Email' onChangeText={onChange} value={email}/>
                     </div>
-                    <div>
-                        <p>Enter your email address and we will send you futher instructions</p>
-                    </div>
-                    <div>
-                        <SuperButton disabled={isLoading}>Send Instructions</SuperButton>
-                    </div>
-                </form>
-            </div>
-
-            <div>
-                <p>Did you remember your password?</p>
-                <a href='/login'>Try logging in</a>
+                </div>
+                <div className={s.info}> 
+                    <span >Enter your email address and we will send you further instructions</span>
+                </div>
+                <div className={s.button}>
+                    <SuperButton disabled={isLoading}>Send Instructions</SuperButton>
+                </div>
+            </form>
+            
+            <p className={s.secondInfo}>Did you remember your password?</p>
+            <div className={s.loginRedirect}>
+                <NavLink to='/login'>login</NavLink>
             </div>
         </div>
     )

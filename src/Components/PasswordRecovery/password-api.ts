@@ -7,6 +7,11 @@ const instance = axios.create({
 
 export const authAPI = {
   createNewPassword(data: PasswordRecoveryInitialStateType) {
-    return instance.post('auth/forgot', data)
+    return instance.post<RequestResponeType>('auth/forgot', data)
   }
+}
+
+export type RequestResponeType = {
+  info: string
+  error: string
 }
