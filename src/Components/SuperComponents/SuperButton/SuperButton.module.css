@@ -11,15 +11,17 @@
     cursor: pointer;
 }
 
-.red {
+.disabled {
+    padding: 0 8px 0 8px;
+    transition: 1s all;
     text-align: center;
     height: 25px;
+    background: darkcyan;
     font-size: 15px;
     color: white;
     border-radius: 10px;
     border: none;
-    cursor: pointer;
-    background: red;
+    opacity: .5;
 }
 
 .red:hover, .default:hover {

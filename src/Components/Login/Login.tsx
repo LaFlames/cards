@@ -13,7 +13,7 @@ export const Login = () => {
 
     let dispatch = useDispatch()
 
-    let isloading = useSelector<AppRootStateType, boolean>(state => state.login.isLoading)
+    let isLoading = useSelector<AppRootStateType, boolean>(state => state.login.isLoading)
     let isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     let errorMessage = useSelector<AppRootStateType, string>(state => state.login.errorMessage)
 
@@ -38,7 +38,7 @@ export const Login = () => {
 
     return (
         <div className="login">
-            {isloading && <span className="login_loading">Loading...</span>}
+            {isLoading && <span className="login_loading">Loading...</span>}
             <h2 className="login_title">Sign In</h2>
             {errorMessage && <span className="login_errorMessage">{errorMessage}</span>}
             <div className="login_emailInput">
@@ -55,7 +55,7 @@ export const Login = () => {
             </div>
             <NavLink to={PATH.ENTER_NEW_PASSWORD} className="login_forgetPassword">Forgot password</NavLink>
             <div className="login_button">
-                <SuperButton onClick={loginUserOnClick}>Login</SuperButton>
+                <SuperButton onClick={loginUserOnClick} disabled={isLoading}>Login</SuperButton>
             </div>
             <div className="login_dontHaveAcc">Don't have an account?</div>
             <div className="login_signUp">
