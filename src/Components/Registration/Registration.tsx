@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import st from './Registration.module.css'
+import './Registration.scss'
 import {SuperButton} from "../SuperComponents/SuperButton/SuperButton";
 import {NavLink, Redirect} from 'react-router-dom';
 import {PATH} from "../Routes";
@@ -56,34 +56,35 @@ export const Registration = () => {
     return (
         <div>
             {isLoading && <h1>Loading...</h1>}
-            <div className={st.registrationCardContainer}>
-                <div className={st.cardWrapper}>
+            <div className={"registrationCardContainer"}>
+                <div className={"cardWrapper"}>
                     <h2>Registration</h2>
                     <div>
                         TEAM 151021
                     </div>
-                    <div className={st.dataContainer}>
-                        <div className={st.dataInputBlock}>
+                    <div className={"dataContainer"}>
+                        <div className={"dataInputBlock"}>
                             <span>Email</span>
                             <SuperInputText onChangeText={onChangeEmailVal} value={eMailValue}/>
                             {eMailValidation(eMailValue) &&
-                            <div className={st.validatorStyles}>Insert valid Email please...</div>}
+                            <div className={"validatorStyles"}>Insert valid Email please...</div>}
                         </div>
-                        <div className={st.dataInputBlock}>
+                        <div className={"dataInputBlock"}>
                             <span>Password</span>
                             <SuperInputText onChangeText={onChangePassWordVal} value={passWordValue} type={'password'}/>
                             {passWordValidation(passWordValue) &&
-                            <div className={st.validatorStyles}>Insert 5-15 symbols</div>}
+                            <div className={"validatorStyles"}>Insert 5-15 symbols</div>}
                         </div>
-                        <div className={st.dataInputBlock}>
+                        <div className={"dataInputBlock"}>
                             <span>Confirm Password</span>
-                            <SuperInputText onChangeText={onChangeConfirmedPwVal} value={confirmedPassWordValue}/>
+                            <SuperInputText onChangeText={onChangeConfirmedPwVal} value={confirmedPassWordValue} type={'password'}/>
                             {confirmPwValidation(confirmedPassWordValue) &&
-                            <div className={st.validatorStyles}>Insert 5-15 symbols</div>}
+                            <div className={"validatorStyles"}>Insert 5-15 symbols</div>}
                         </div>
                     </div>
-                    <div className={st.buttonContainer}>
-                        <SuperButton onClick={regUserHandler}>Sign up</SuperButton>
+                    <div className={"buttonContainer"}>
+                        <SuperButton onClick={regUserHandler} disabled={isLoading}>{isLoading ? 'Loading...' : 'Reg'}</SuperButton>
+                        {/*<SuperButton onClick={regUserHandler}>Sign up</SuperButton>*/}
                     </div>
                     <NavLink to={PATH.LOGIN}>Login</NavLink>
                 </div>
@@ -91,4 +92,3 @@ export const Registration = () => {
         </div>
     )
 }
-

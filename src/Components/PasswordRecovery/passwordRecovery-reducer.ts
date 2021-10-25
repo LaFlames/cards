@@ -5,7 +5,7 @@ const initialState: PasswordRecoveryInitialStateType = {
     isLoading: false,
     errorMessage: '',
     isRequestSucceeded: false,
-    email: 'ok',
+    email: '',
     from: "test-front-admin",
     message: `<div style="background-color: lime; padding: 15px"> password recovery link: <a href='http://localhost:3000/friday-project#/add-new-password/$token$'> link</a></div>`		
 }

@@ -86,6 +86,7 @@ export const regUser_TC = (email: string, password: string) => (dispatch: Dispat
                 dispatch(loadingMode(false))
             } else {
                 alert('Some Error has occurred, check your internet connection ')
+                dispatch(loadingMode(false))
             }
 
         })
