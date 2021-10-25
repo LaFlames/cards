@@ -18,6 +18,12 @@ export const Header = () => {
                         <NavLink to={PATH.PROFILE} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Profile</NavLink>
                     </li>
                     <li>
+                        <NavLink to={PATH.PACKS} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Packs</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={PATH.CARDS} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Cards</NavLink>
+                    </li>
+                    <li>
                         <NavLink to={PATH.PASSWORD_RECOVERY} className={"header_linkList-item"} activeClassName={"header_linkList-activeItem"}>Password recovery</NavLink>
                     </li>
                     <li>
