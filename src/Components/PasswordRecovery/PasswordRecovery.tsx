@@ -6,7 +6,7 @@ import { SuperButton } from '../SuperComponents/SuperButton/SuperButton'
 import { SuperInputText } from '../SuperComponents/SuperInputText/SuperInputText'
 import { PasswordRecoveryInitialStateType, setEmailForPasswordTC, setErrorMessageAC, setIsPasswordRecoverySucceededAC, setPasswordRecoveryAC } from './passwordRecovery-reducer'
 import { NavLink } from 'react-router-dom'
-import { eMailValidation } from '../Registration/validator'
+import { eMailValidation } from '../../utilites/validator'
 import { SuccessfulMessage } from './SuccesfulMessage'
 
 

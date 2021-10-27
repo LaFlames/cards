@@ -1,16 +1,15 @@
 import { Dispatch } from "redux";
-import {loginAPI, UserProfileType} from "./login-api";
+import {loginAPI} from "../../app/app-api";
 
 
-const initialState: LoginInitialStateType = {
+
+const loginInitialState: LoginInitialStateType = {
     isLoading: false,
-    rememberMe: false,
     isAuth: false,
-    userProfile: null,
     errorMessage: ""
 }
 
-export const loginReducer = (state = initialState, action: ActionsType): LoginInitialStateType => {
+export const loginReducer = (state = loginInitialState, action: LoginActionsType): LoginInitialStateType => {
     switch (action.type) {
         case "LOGIN/SET-IS-LOADING": {
             return {
@@ -27,11 +26,6 @@ export const loginReducer = (state = initialState, action: ActionsType): LoginIn
                 ...state, isAuth: action.isAuth
             }
         }
-        case "LOGIN/SET-USER-PROFILE": {
-            return {
-                ...state, userProfile: action.userProfile
-            }
-        }
         default:
             return state
     }
@@ -39,19 +33,16 @@ export const loginReducer = (state = initialState, action: ActionsType): LoginIn
 
 
 //types
-type ActionsType =
+export type LoginActionsType =
     | ReturnType<typeof setIsLoading>
-    | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setError>
     | ReturnType<typeof setIsAuth>
 
 
 export type LoginInitialStateType = {
     isLoading: boolean
-    rememberMe: boolean
     errorMessage: string
     isAuth: boolean
-    userProfile: UserProfileType | null
 }
 
 
@@ -65,9 +56,6 @@ export const setIsLoading = (isLoading: boolean) => {
 export const setIsAuth = (isAuth: boolean) => {
     return {type: 'LOGIN/SET-IS-AUTH', isAuth} as const
 }
-export const setUserProfile = (userProfile: UserProfileType | null) => {
-    return {type: 'LOGIN/SET-USER-PROFILE', userProfile} as const
-}
 
 
 
@@ -77,8 +65,7 @@ export const loginUserTC = (email: string, password: string, rememberMe: boolean
     dispatch(setError(""))
     loginAPI.loginUser({email, password, rememberMe})
         .then(res => {
-            if (res.data) {
-                dispatch(setUserProfile(res.data))
+            if (res.data._id) {
                 dispatch(setIsAuth(true))
                 dispatch(setIsLoading(false))
             }
@@ -90,13 +77,11 @@ export const loginUserTC = (email: string, password: string, rememberMe: boolean
             }
         })
 }
-export const unLoginUserTC = () => (dispatch: Dispatch) => {
-    dispatch(setIsAuth(false))
-    /*loginAPI.unLoginUser()
+export const logoutUserTC = () => (dispatch: Dispatch) => {
+    loginAPI.logoutUser()
         .then(res => {
             if (res.data) {
-                dispatch(setUserProfile(null))
                 dispatch(setIsAuth(false))
             }
-        })*/
+        })
 }

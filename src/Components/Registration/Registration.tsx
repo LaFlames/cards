@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {isRegMode, regUser_TC, updateConfirmedPwVal, updateEmailVal, updatePasswordVal} from "./registration-reducer";
 import {SuperInputText} from "../SuperComponents/SuperInputText/SuperInputText";
 import {AppRootStateType} from "../../app/store";
-import {confirmPwValidation, eMailValidation, passWordValidation} from "./validator";
+import {confirmPwValidation, eMailValidation, passWordValidation} from "../../utilites/validator";
 
 export const Registration = () => {
 

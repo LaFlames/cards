@@ -26,8 +26,7 @@ export const Login = () => {
     const onChangePassword = (value: string) => {
         setPassword(value)
     }
-
-    const loginUserOnClick = () => {
+    const loginUserHandler = () => {
         dispatch(loginUserTC(email, password, false))
     }
 
@@ -44,18 +43,18 @@ export const Login = () => {
             <div className="login_emailInput">
                 <span className="login_emailInput-title">Email</span>
                 <div>
-                    <SuperInputText onChangeText={onChangeEmail} type="email"/>
+                    <SuperInputText onChangeText={onChangeEmail} placeholder={"..."} type="email"/>
                 </div>
             </div>
             <div className="login_passwordInput">
                 <span className="login_passwordInput-title">Password</span>
                 <div>
-                    <SuperInputText onChangeText={onChangePassword} type="password"/>
+                    <SuperInputText onChangeText={onChangePassword} placeholder={"..."} type="password"/>
                 </div>
             </div>
             <NavLink to={PATH.ENTER_NEW_PASSWORD} className="login_forgetPassword">Forgot password</NavLink>
             <div className="login_button">
-                <SuperButton onClick={loginUserOnClick} disabled={isLoading}>Login</SuperButton>
+                <SuperButton onClick={loginUserHandler} disabled={isLoading}>Login</SuperButton>
             </div>
             <div className="login_dontHaveAcc">Don't have an account?</div>
             <div className="login_signUp">
