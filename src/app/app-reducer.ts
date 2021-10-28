@@ -6,7 +6,7 @@ const initialState: LoginInitialStateType = {
     errorMessage: ""
 }
 
-export const appReducer = (state = initialState, action: ActionsType): LoginInitialStateType => {
+export const appReducer = (state = initialState, action: ActionsAppType): LoginInitialStateType => {
     switch (action.type) {
         case "APP/SET-IS-LOADING": {
             return {
@@ -25,7 +25,7 @@ export const appReducer = (state = initialState, action: ActionsType): LoginInit
 
 
 //types
-type ActionsType =
+export type ActionsAppType =
     | ReturnType<typeof setIsLoading>
     | ReturnType<typeof setError>
 

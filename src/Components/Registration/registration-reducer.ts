@@ -17,7 +17,7 @@ const initialState: RegistrationInitialStateType = {
     confirmedPass: '',
 }
 
-export const registrationReducer = (state = initialState, action: ActionsType): RegistrationInitialStateType => {
+export const registrationReducer = (state = initialState, action: ActionsRegisterType): RegistrationInitialStateType => {
     switch (action.type) {
         case 'REG/SET-EMAIL': {
             return {...state, email: action.emailText}
@@ -64,7 +64,7 @@ export const updatePasswordVal = (pwText: string) => {
     return {type: 'REG/SET-PASSWORD', pwText} as const
 }
 
-type ActionsType = UpdateEmailVal_T
+export type ActionsRegisterType = UpdateEmailVal_T
     | UpdatePassword_T
     | UpdateConfirmedPwVal_T
     | LoadingMode_T

@@ -17,7 +17,7 @@ export const initialState: ProfileInitialStateType = {
     error: ''
 }
 
-export const profileReducer = (state = initialState, action: ActionsType) => {
+export const profileReducer = (state = initialState, action: ActionsProfileType) => {
     switch (action.type) {
         case 'LOGIN/SET-USER-DATA': {
             return {
@@ -55,4 +55,4 @@ export type ProfileInitialStateType = {
     rememberMe: boolean;
     error?: string;
 }
-type ActionsType = ReturnType<typeof setUserDataAC>
+export type ActionsProfileType = ReturnType<typeof setUserDataAC>
