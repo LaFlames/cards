@@ -14,7 +14,6 @@ export const Profile = () => {
     let dispatch = useDispatch()
 
     let userProfile = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
-    let isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     let {name, email, avatar, ...restProps} = userProfile
 
 
@@ -23,7 +22,7 @@ export const Profile = () => {
     }
 
 
-    if (!isAuth) {
+    if (!userProfile._id) {
         return <Redirect to={PATH.LOGIN}/>
     }
 

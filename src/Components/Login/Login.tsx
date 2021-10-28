@@ -7,6 +7,7 @@ import {PATH} from "../Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {loginUserTC} from "./login-reducer";
+import {ProfileInitialStateType} from "../Profile/profile-reducer";
 
 
 export const Login = () => {
@@ -14,8 +15,8 @@ export const Login = () => {
     let dispatch = useDispatch()
 
     let isLoading = useSelector<AppRootStateType, boolean>(state => state.login.isLoading)
-    let isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
     let errorMessage = useSelector<AppRootStateType, string>(state => state.login.errorMessage)
+    let userProfile = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
 
     let [email, setEmail] = useState<string>("")
     let [password, setPassword] = useState<string>("")
@@ -31,7 +32,7 @@ export const Login = () => {
     }
 
 
-    if (isAuth) {
+    if (userProfile._id) {
         return <Redirect to={PATH.PROFILE}/>
     }
 
