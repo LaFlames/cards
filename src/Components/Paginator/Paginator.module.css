@@ -1,0 +1,29 @@
+.selectedPage {
+    color: red;
+    background-color: blue;
+}
+.paginator {
+    margin-top: 2rem;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.paginator span {
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 3px;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon {
+    cursor: pointer;
+}
+
+

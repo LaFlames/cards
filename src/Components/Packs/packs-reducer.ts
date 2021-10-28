@@ -35,6 +35,16 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
         }
         case "SET_SEARCH_PACKS":
             return { ...state, searchPacks: action.searchValue };
+        case "SET_CURRENT_PAGE":
+            return {
+                ...state,
+                currentPage: action.currentPage,
+            };
+        case "SET_PACKS_TOTAL_COUNT":
+            return {
+                ...state,
+                cardPacksTotalCount: action.cardPacksTotalCount,
+            };
         default:
             return state
     }
@@ -45,20 +55,39 @@ export const setPacksAC = (cardPacks: PackType[]) => {
     return { type: "SET_PACKS", cardPacks } as const;
 };
 export const setSearchPacksAC = (searchValue: string) => {
-    return {
-        type: "SET_SEARCH_PACKS",
-        searchValue,
-    } as const;
+    return { type: "SET_SEARCH_PACKS", searchValue } as const;
+};
+export const setPacksTotalCountAC = (cardPacksTotalCount: number) => {
+    return { type: "SET_PACKS_TOTAL_COUNT", cardPacksTotalCount } as const;
+};
+export const setCurrentPageAC = (currentPage: number) => {
+    return { type: "SET_CURRENT_PAGE", currentPage } as const;
 };
 
 //thunk
 
 export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootStateType) => {
-    const {searchPacks} = getState().packs
+    const {
+        currentPage,
+        pageCount,
+        searchPacks,
+        minCardsCount,
+        maxCardsCount,
+        myPage,
+        userId
+    } = getState().packs
 
-    packsAPI.getPacks(searchPacks)
+    packsAPI.getPacks(
+        currentPage,
+        pageCount,
+        searchPacks,
+        userId,
+        minCardsCount,
+        maxCardsCount
+    )
         .then(res => {
             dispatch(setPacksAC(res.data.cardPacks))
+            dispatch(setPacksTotalCountAC(res.data.cardPacksTotalCount));
             console.log(res)
         })
 }
@@ -68,6 +97,8 @@ export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootSt
 export type ActionsPacksType = 
     | ReturnType<typeof setPacksAC>
     | ReturnType<typeof setSearchPacksAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setPacksTotalCountAC>
 
 export type PacksInitialStateType = {
     cardPacks: PackType[];
