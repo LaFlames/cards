@@ -43,7 +43,7 @@ export const SuperInputText: React.FC<SuperInputTextPropsType> = (
     return (
         <>
             <input
-                placeholder={"Type smth..."}
+                placeholder={"..."}
                 type={'text'}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}

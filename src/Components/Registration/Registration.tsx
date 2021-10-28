@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react'
 import './Registration.scss'
 import {SuperButton} from "../SuperComponents/SuperButton/SuperButton";
-import {NavLink, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {PATH} from "../Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {isRegMode, regUser_TC, updateConfirmedPwVal, updateEmailVal, updatePasswordVal} from "./registration-reducer";
 import {SuperInputText} from "../SuperComponents/SuperInputText/SuperInputText";
 import {AppRootStateType} from "../../app/store";
 import {confirmPwValidation, eMailValidation, passWordValidation} from "../../utilites/validator";
+import {CustomNavLink} from "../SuperComponents/CustomNavLink/CustomNavlink";
 
 export const Registration = () => {
 
@@ -54,41 +55,49 @@ export const Registration = () => {
     }
 
     return (
-        <div>
-            {isLoading && <h1>Loading...</h1>}
-            <div className={"registrationCardContainer"}>
-                <div className={"cardWrapper"}>
-                    <h2>Registration</h2>
-                    <div>
-                        TEAM 151021
-                    </div>
-                    <div className={"dataContainer"}>
-                        <div className={"dataInputBlock"}>
-                            <span>Email</span>
-                            <SuperInputText onChangeText={onChangeEmailVal} value={eMailValue}/>
-                            {eMailValidation(eMailValue) &&
-                            <div className={"validatorStyles"}>Insert valid Email please...</div>}
-                        </div>
-                        <div className={"dataInputBlock"}>
-                            <span>Password</span>
-                            <SuperInputText onChangeText={onChangePassWordVal} value={passWordValue} type={'password'}/>
-                            {passWordValidation(passWordValue) &&
-                            <div className={"validatorStyles"}>Insert 5-15 symbols</div>}
-                        </div>
-                        <div className={"dataInputBlock"}>
-                            <span>Confirm Password</span>
-                            <SuperInputText onChangeText={onChangeConfirmedPwVal} value={confirmedPassWordValue} type={'password'}/>
-                            {confirmPwValidation(confirmedPassWordValue) &&
-                            <div className={"validatorStyles"}>Insert 5-15 symbols</div>}
-                        </div>
-                    </div>
-                    <div className={"buttonContainer"}>
-                        <SuperButton onClick={regUserHandler} disabled={isLoading}>{isLoading ? 'Loading...' : 'Reg'}</SuperButton>
-                        {/*<SuperButton onClick={regUserHandler}>Sign up</SuperButton>*/}
-                    </div>
-                    <NavLink to={PATH.LOGIN}>Login</NavLink>
+        <div className={"register"}>
+            {isLoading && <span className="register_loading">Loading...</span>}
+            <h2 className={"register_title"}>Sign Up</h2>
+            <div className={"register_emailInput"}>
+                <span className={"register_emailInput-title"}>Email</span>
+                <div>
+                    <SuperInputText
+                        onChangeText={onChangeEmailVal}
+                        value={eMailValue}
+                        type={'email'}
+                    />
                 </div>
+                {eMailValidation(eMailValue) && <span className={"emailValidation"}>Insert valid email please</span>}
             </div>
+            <div className={"register_passwordInput"}>
+                <span className={"register_passwordInput-title"}>Password</span>
+                <div>
+                    <SuperInputText
+                        onChangeText={onChangePassWordVal}
+                        value={passWordValue}
+                        type={'password'}/>
+                </div>
+                {passWordValidation(passWordValue) && <span className={"passwordValidation"}>Insert 5-15 symbols</span>}
+            </div>
+            <div className={"register_confirmPasswordInput"}>
+                <span className={"register_confirmPasswordInput-title"}>Confirm Password</span>
+                <div>
+                    <SuperInputText
+                        onChangeText={onChangeConfirmedPwVal}
+                        value={confirmedPassWordValue}
+                        type={'password'}/>
+                </div>
+                {confirmPwValidation(confirmedPassWordValue) &&
+                <span className={"confirmPassValidation"}>Insert 5-15 symbols</span>}
+            </div>
+            <div className={"register_button"}>
+                <SuperButton onClick={regUserHandler} disabled={isLoading}>Register</SuperButton>
+            </div>
+            <span className="register_haveAcc">Already have an account?</span>
+            <div className="register_signIn">
+                <CustomNavLink to={PATH.LOGIN} title={"Sign In"}/>
+            </div>
+
         </div>
     )
 }

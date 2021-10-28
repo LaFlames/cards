@@ -1,21 +1,20 @@
-$mainColor: darkcyan;
-
-
 .header {
     nav {
-        margin: 0 auto 30px auto;
         width: 1200px;
         height: 30px;
-        border-radius: 10px;
+        margin: 0 auto 80px auto;
+        padding-top: 10px;
     }
     &_linkList {
         display: flex;
         justify-content: space-between;
         list-style: none;
         padding-left: 0;
+        margin-bottom: 0;
+        margin-top: 0;
         &-item {
             font-size: 18px;
-            color: $mainColor;
+            color: darkcyan;
             text-decoration: none;
             &:hover {
                 text-decoration: underline;

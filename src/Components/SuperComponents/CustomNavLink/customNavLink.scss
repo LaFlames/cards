@@ -1,0 +1,16 @@
+.customNavLink {
+  font-size: 18px;
+  color: darkcyan;
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 24px;
+  &:hover {
+    color: darkslateblue;
+  }
+}
+
+.activeCustomNavLink {
+  color: violet;
+  text-decoration: none;
+}
+

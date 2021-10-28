@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {loginUserTC} from "./login-reducer";
 import {ProfileInitialStateType} from "../Profile/profile-reducer";
+import {CustomNavLink} from "../SuperComponents/CustomNavLink/CustomNavlink";
 
 
 export const Login = () => {
@@ -44,22 +45,26 @@ export const Login = () => {
             <div className="login_emailInput">
                 <span className="login_emailInput-title">Email</span>
                 <div>
-                    <SuperInputText onChangeText={onChangeEmail} placeholder={"..."} type="email"/>
+                    <SuperInputText
+                        onChangeText={onChangeEmail}
+                        type="email"/>
                 </div>
             </div>
             <div className="login_passwordInput">
                 <span className="login_passwordInput-title">Password</span>
                 <div>
-                    <SuperInputText onChangeText={onChangePassword} placeholder={"..."} type="password"/>
+                    <SuperInputText
+                        onChangeText={onChangePassword}
+                        type="password"/>
                 </div>
             </div>
-            <NavLink to={PATH.ENTER_NEW_PASSWORD} className="login_forgetPassword">Forgot password</NavLink>
+            <NavLink to={PATH.PASSWORD_RECOVERY} className="login_forgetPassword">Forgot password?</NavLink>
             <div className="login_button">
                 <SuperButton onClick={loginUserHandler} disabled={isLoading}>Login</SuperButton>
             </div>
-            <div className="login_dontHaveAcc">Don't have an account?</div>
+            <span className="login_dontHaveAcc">Don't have an account?</span>
             <div className="login_signUp">
-                <NavLink to={PATH.REGISTRATION} className={"header_linkList-item"}>Sign Up</NavLink>
+                <CustomNavLink to={PATH.REGISTRATION} title={"Sign Up"}/>
             </div>
         </div>
     )
