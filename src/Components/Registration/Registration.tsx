@@ -77,7 +77,7 @@ export const Registration = () => {
                         value={passWordValue}
                         type={'password'}/>
                 </div>
-                {passWordValidation(passWordValue) && <span className={"passwordValidation"}>Insert 5-15 symbols</span>}
+                {passWordValidation(passWordValue) && <span className={"passwordValidation"}>Insert 8-15 symbols</span>}
             </div>
             <div className={"register_confirmPasswordInput"}>
                 <span className={"register_confirmPasswordInput-title"}>Confirm Password</span>
@@ -88,7 +88,7 @@ export const Registration = () => {
                         type={'password'}/>
                 </div>
                 {confirmPwValidation(confirmedPassWordValue) &&
-                <span className={"confirmPassValidation"}>Insert 5-15 symbols</span>}
+                <span className={"confirmPassValidation"}>Insert 8-15 symbols</span>}
             </div>
             <div className={"register_button"}>
                 <SuperButton onClick={regUserHandler} disabled={isLoading}>Register</SuperButton>

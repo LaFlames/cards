@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {PasswordRecoveryInitialStateType} from "../Components/PasswordRecovery/passwordRecovery-reducer";
 import {ProfileInitialStateType} from "../Components/Profile/profile-reducer";
+import {EnterNewPassInitialStateType} from "../Components/EnterNewPassword/enterNewPassword-reducer";
 
 
 const instance = axios.create({
@@ -26,6 +27,9 @@ export const loginAPI = {
 export const passwordAPI = {
     createNewPassword(data: PasswordRecoveryInitialStateType) {
         return instance.post<PassRequestResponseType>('auth/forgot', data)
+    },
+    setNewPassword(data: EnterNewPassInitialStateType) {
+        return instance.post<PassRequestResponseType>('/auth/set-new-password', data)
     }
 }
 

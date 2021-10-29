@@ -7,7 +7,7 @@ export const eMailValidation = (eMailValue: string) => {
 
 export const passWordValidation = (passWordValue: string) => {
     const maxLength = 15
-    const minLength = 5
+    const minLength = 8
     let error = false
     if (passWordValue.length < minLength || passWordValue.length > maxLength) error = true
     if (passWordValue === '') error = false
@@ -16,7 +16,7 @@ export const passWordValidation = (passWordValue: string) => {
 
 export const confirmPwValidation = (confirmedPassWordValue: string) => {
     const maxLength = 15
-    const minLength = 5
+    const minLength = 8
     let error = false
     if (confirmedPassWordValue.length < minLength || confirmedPassWordValue.length > maxLength) error = true
     if (confirmedPassWordValue === '') error = false

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {SuperInputText} from "../SuperComponents/SuperInputText/SuperInputText";
 import {SuperButton} from "../SuperComponents/SuperButton/SuperButton";
 import './login.scss'
@@ -6,7 +6,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from "../Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {loginUserTC} from "./login-reducer";
+import {loginUserTC, setError} from "./login-reducer";
 import {ProfileInitialStateType} from "../Profile/profile-reducer";
 import {CustomNavLink} from "../SuperComponents/CustomNavLink/CustomNavlink";
 
@@ -21,6 +21,14 @@ export const Login = () => {
 
     let [email, setEmail] = useState<string>("")
     let [password, setPassword] = useState<string>("")
+
+    useEffect(() => {
+        return () => {
+            dispatch(setError(''))
+            setEmail('')
+            setPassword('')
+        }
+    }, [])
 
     const onChangeEmail = (value: string) => {
         setEmail(value)
