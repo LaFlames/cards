@@ -17,12 +17,11 @@ const initialState: PacksInitialStateType = {
     minCardsCount: 0,
     maxCardsCount: 100,
     currentPage: 1,
-    pageCount: 10,
+    pageCount: 5,
     cardPacksTotalCount: 0,
     userId: "",
     packsId: "",
     searchPacks: "",
-    myPage: false,
 }
 
 export const packsReducer = (state = initialState, action: ActionsPacksType): PacksInitialStateType => {
@@ -45,6 +44,11 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
                 ...state,
                 cardPacksTotalCount: action.cardPacksTotalCount,
             };
+        case "SET_PAGE_COUNT":
+            return {
+                ...state,
+                pageCount: action.pageCount,
+            };
         default:
             return state
     }
@@ -63,6 +67,9 @@ export const setPacksTotalCountAC = (cardPacksTotalCount: number) => {
 export const setCurrentPageAC = (currentPage: number) => {
     return { type: "SET_CURRENT_PAGE", currentPage } as const;
 };
+export const setPageCountAC = (pageCount: number) => {
+    return { type: "SET_PAGE_COUNT", pageCount } as const;
+};
 
 //thunk
 
@@ -73,7 +80,6 @@ export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootSt
         searchPacks,
         minCardsCount,
         maxCardsCount,
-        myPage,
         userId
     } = getState().packs
 
@@ -88,7 +94,6 @@ export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootSt
         .then(res => {
             dispatch(setPacksAC(res.data.cardPacks))
             dispatch(setPacksTotalCountAC(res.data.cardPacksTotalCount));
-            console.log(res)
         })
 }
 
@@ -99,6 +104,7 @@ export type ActionsPacksType =
     | ReturnType<typeof setSearchPacksAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setPacksTotalCountAC>
+    | ReturnType<typeof setPageCountAC>
 
 export type PacksInitialStateType = {
     cardPacks: PackType[];
@@ -110,7 +116,6 @@ export type PacksInitialStateType = {
     userId: string;
     packsId: string;
     searchPacks: string;
-    myPage: boolean;
 }
 
 export type PackType = {
