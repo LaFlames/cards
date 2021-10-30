@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
-import './Packs.scss'
+import './PacksDima.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {packsAPI, SingleCard_T} from "./packsAPI";
+import {packsAPI_Dima, SingleCard_T} from "./packsAPI_Dima";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../Routes";
 import {editPackTC, removePackTC, setPacsDataTC} from "./packs-reducer-dima";

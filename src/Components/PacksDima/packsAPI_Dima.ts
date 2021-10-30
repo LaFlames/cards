@@ -11,7 +11,7 @@ const instance = axios.create({
     withCredentials: true
 })
 
-export const packsAPI = {
+export const packsAPI_Dima = {
     getPacks() {
         return instance.get<ReceivedCardsType_T>(`/cards/pack`)
     },

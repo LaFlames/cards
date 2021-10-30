@@ -1,4 +1,4 @@
-import {packsAPI, SingleCard_T} from "./packsAPI";
+import {packsAPI_Dima, SingleCard_T} from "./packsAPI_Dima";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {AppRootStateType} from "../../app/store";
@@ -28,7 +28,7 @@ type ActionsType = SetCardsData_T
 // TC
 export const setPacsDataTC = () => (dispatch: Dispatch) => {
     // let token = getCookie('token');
-    packsAPI.getPacks()
+    packsAPI_Dima.getPacks()
         .then(res => {
             // console.log(res.data.cardPacks[0]._id)
             dispatch(setPacksDataAC(res.data.cardPacks))
@@ -41,7 +41,7 @@ export const setPacsDataTC = () => (dispatch: Dispatch) => {
 export const removePackTC = (
     id: string
 ): ThunkAction<void, AppRootStateType, unknown, ActionsType> => async dispatch => {
-    packsAPI.rmPacks(id)
+    packsAPI_Dima.rmPacks(id)
         .then(() => {
             dispatch(setPacsDataTC())
         })
@@ -53,7 +53,7 @@ export const removePackTC = (
 export const editPackTC = (
     _id: string, name: string | null
 ): ThunkAction<void, AppRootStateType, unknown, ActionsType> => async dispatch => {
-    packsAPI.editPack({_id, name})
+    packsAPI_Dima.editPack({_id, name})
         .then(() => {
             dispatch(setPacsDataTC())
         })
