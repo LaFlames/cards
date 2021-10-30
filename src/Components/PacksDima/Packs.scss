@@ -1,0 +1,25 @@
+.tableWrapper {
+    //border: 1px solid blue;
+    width: 900px;
+  min-height: 100px;
+  table {
+    width: 100%;
+    .tr1 {
+      background-color: #788fa8;
+      width: 100%;
+    }
+    .tr2 {
+      background-color: #b5c4d5;
+      width: 100%;
+      .td1 {
+        text-align: center;
+      }
+      .td2 {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+  }
+
+}
