@@ -13,7 +13,7 @@ export const PacksDima = () => {
     const dispatch = useDispatch()
 
     let userProfile = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
-    const packs = useSelector<AppRootStateType, SingleCard_T[]>(state => state.packs)
+    const packs = useSelector<AppRootStateType, SingleCard_T[]>(state => state.packs1)
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.login.isAuth)
 
     useEffect(() => {

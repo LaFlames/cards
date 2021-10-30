@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     passwordRecovery: passwordRecoveryReducer,
     enterNewPassword: enterNewPasswordReducer,
-    packs: packsReducerDima,
+    packs1: packsReducerDima,
     cards: cardsReducer,
 })
 
