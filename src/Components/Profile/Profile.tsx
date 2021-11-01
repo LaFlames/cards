@@ -7,8 +7,6 @@ import {PATH} from "../Routes";
 import {logoutUserTC} from "../Login/login-reducer";
 import {ProfileInitialStateType} from "./profile-reducer";
 
-
-
 export const Profile = () => {
 
     let dispatch = useDispatch()
