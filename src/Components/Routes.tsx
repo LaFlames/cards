@@ -7,8 +7,8 @@ import {Registration} from "./Registration/Registration";
 import {Profile} from "./Profile/Profile";
 import {PasswordRecovery} from "./PasswordRecovery/PasswordRecovery";
 import {EnterNewPassword} from "./EnterNewPassword/EnterNewPassword";
-import {PacksDima} from "./PacksDima/PacksDima";
 import {Cards} from './Cards/Cards';
+import { Packs } from './Packs/Packs';
 
 
 export const PATH = {
@@ -32,7 +32,7 @@ function Routes() {
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
                 <Route path={PATH.REGISTRATION} render={() => <Registration/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
-                <Route path={PATH.PACKS} render={() => <PacksDima/>}/>
+                <Route path={PATH.PACKS} render={() => <Packs/>}/>
                 <Route path={PATH.CARDS} render={() => <Cards/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
                 <Route path={`${PATH.ENTER_NEW_PASSWORD}/:token`} render={() => <EnterNewPassword/>}/>

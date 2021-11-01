@@ -1,4 +1,3 @@
-import { Dispatch } from "redux"
 import { AppRootStateType, ThunkType } from "../../app/store"
 import { packsAPI } from "./packs-api"
 
@@ -9,7 +8,7 @@ const initialState: PacksInitialStateType = {
             user_id: "",
             user_name: "",
             private: false,
-            name: "first",
+            name: "",
             cardsCount: 0,
             updated: new Date(),
         },
@@ -26,25 +25,25 @@ const initialState: PacksInitialStateType = {
 
 export const packsReducer = (state = initialState, action: ActionsPacksType): PacksInitialStateType => {
     switch (action.type) {
-        case 'SET_PACKS': {
+        case 'packs/SET-PACKS': {
             return {
                 ...state, 
                 cardPacks: action.cardPacks
             }
         }
-        case "SET_SEARCH_PACKS":
+        case "packs/SET-SEARCH-PACKS":
             return { ...state, searchPacks: action.searchValue };
-        case "SET_CURRENT_PAGE":
+        case "packs/SET-CURRENT-PAGE":
             return {
                 ...state,
                 currentPage: action.currentPage,
             };
-        case "SET_PACKS_TOTAL_COUNT":
+        case "packs/SET-PACKS-TOTAL-COUNT":
             return {
                 ...state,
                 cardPacksTotalCount: action.cardPacksTotalCount,
             };
-        case "SET_PAGE_COUNT":
+        case "packs/SET-PAGE-COUNT":
             return {
                 ...state,
                 pageCount: action.pageCount,
@@ -56,19 +55,19 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
 
 // Action 
 export const setPacksAC = (cardPacks: PackType[]) => {
-    return { type: "SET_PACKS", cardPacks } as const;
+    return { type: "packs/SET-PACKS", cardPacks } as const;
 };
 export const setSearchPacksAC = (searchValue: string) => {
-    return { type: "SET_SEARCH_PACKS", searchValue } as const;
+    return { type: "packs/SET-SEARCH-PACKS", searchValue } as const;
 };
 export const setPacksTotalCountAC = (cardPacksTotalCount: number) => {
-    return { type: "SET_PACKS_TOTAL_COUNT", cardPacksTotalCount } as const;
+    return { type: "packs/SET-PACKS-TOTAL-COUNT", cardPacksTotalCount } as const;
 };
 export const setCurrentPageAC = (currentPage: number) => {
-    return { type: "SET_CURRENT_PAGE", currentPage } as const;
+    return { type: "packs/SET-CURRENT-PAGE", currentPage } as const;
 };
 export const setPageCountAC = (pageCount: number) => {
-    return { type: "SET_PAGE_COUNT", pageCount } as const;
+    return { type: "packs/SET-PAGE-COUNT", pageCount } as const;
 };
 
 //thunk
@@ -94,6 +93,28 @@ export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootSt
         .then(res => {
             dispatch(setPacksAC(res.data.cardPacks))
             dispatch(setPacksTotalCountAC(res.data.cardPacksTotalCount));
+        })
+}
+
+export const removePackTC = (id: string): ThunkType => (dispatch, getState: () => AppRootStateType) => {
+    packsAPI.rmPacks(id)
+        .then(() => {
+            dispatch(setPacksTC())
+        })
+        .catch(err => {
+            alert(err.message)
+        })
+}
+
+export const editPackTC = (
+    _id: string, name: string | null
+): ThunkType => (dispatch, getState: () => AppRootStateType) => {
+    packsAPI.editPack({_id, name})
+        .then(() => {
+            dispatch(setPacksTC())
+        })
+        .catch(err => {
+            alert(err.message)
         })
 }
 
