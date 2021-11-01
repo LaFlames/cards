@@ -6,7 +6,7 @@ import {ActionsRegisterType, registrationReducer} from "../Components/Registrati
 import {ActionsForgotType, passwordRecoveryReducer} from "../Components/PasswordRecovery/passwordRecovery-reducer";
 import {enterNewPasswordReducer} from "../Components/EnterNewPassword/enterNewPassword-reducer";
 import {ActionsPacksType, packsReducer} from "../Components/Packs/packs-reducer";
-import {ActionsCardsType, cardsReducer} from "../Components/Cards/cards-reducer";
+import {ActionsCardsTypes, cardsReducer} from "../Components/Cards/cards-reducer";
 import { ActionsAppType } from './app-reducer';
 
 
@@ -34,7 +34,7 @@ export type AppActionsType =
     | ActionsAppType
     | ActionsForgotType
     | ActionsPacksType
-    // | ActionsCardsType;
+    | ActionsCardsTypes;
 
 export type ThunkType = ThunkAction<void, AppRootStateType, unknown, AppActionsType>;
 

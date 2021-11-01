@@ -7,11 +7,15 @@ import {Redirect} from "react-router-dom";
 import { PATH } from '../Routes'
 import SuperSelect from '../SuperComponents/SuperSelect/SuperSelect'
 import { editPackTC, PackType, removePackTC, setCurrentPageAC, setPacksTC, setPageCountAC, setSearchPacksAC } from './packs-reducer'
+import { setCardsPackIdAC, setCardsTC } from '../Cards/cards-reducer'
+import { useHistory } from "react-router-dom";
+
 
 const arr = [4, 5, 7]
 
 export const Packs = () => {
     const dispatch = useDispatch()
+    let history = useHistory()
     const cardsPack = useSelector<AppRootStateType, PackType[]>(state => state.packs.cardPacks)
     const searchPack = useSelector<AppRootStateType, string>(state => state.packs.searchPacks)
     const currentPage = useSelector<AppRootStateType, number>(state => state.packs.currentPage)
@@ -23,14 +27,14 @@ export const Packs = () => {
 
     useEffect(() => {
         dispatch(setPacksTC())
-    }, [dispatch])
+    }, [])
 
     const onChangePageHandler = useCallback(
         (pageNumber: number) => {
             dispatch(setCurrentPageAC(pageNumber));
             dispatch(setPacksTC());
         },
-        [dispatch]
+        []
     );
 
     const setSearchPackHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +58,8 @@ export const Packs = () => {
         }
 
         const LearnHandler = () => {
-            alert('Here is gonna be logic for Learn btn...')
+            dispatch(setCardsTC(el._id))
+            history.push(PATH.CARDS);
         }
 
         return (
