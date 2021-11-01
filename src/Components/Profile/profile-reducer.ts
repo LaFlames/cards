@@ -25,20 +25,40 @@ export const profileReducer = (state = initialState, action: ActionsProfileType)
                 ...action.userData
             }
         }
+        case "LOGIN/UNSET-USER-DATA": {
+            return {
+                ...state,
+                _id: '',
+                email: '',
+                name: '',
+                avatar: '',
+                publicCardPacksCount: 0,
+                created: '',
+                updated: '',
+                isAdmin: false,
+                verified: false,
+                rememberMe: false,
+                error: ''
+            }
+        }
         default:
             return state
     }
 }
 
 //actions
-const setUserDataAC = (userData: ProfileInitialStateType) => ({type: 'LOGIN/SET-USER-DATA', userData} as const)
+export const setUserData = (userData: ProfileInitialStateType) => ({type: 'LOGIN/SET-USER-DATA', userData} as const)
+export const unsetUserData = () => ({type: 'LOGIN/UNSET-USER-DATA'} as const)
 
 
 //thunk
 export const getUserDataTC = () => (dispatch: Dispatch) => {
-    loginAPI.me().then((res) => {
-        dispatch(setUserDataAC(res.data))
-    })
+    loginAPI.me()
+        .then((res) => {
+            if (res.data._id) {
+                dispatch(setUserData(res.data))
+            }
+        })
 }
 
 //types
@@ -55,4 +75,4 @@ export type ProfileInitialStateType = {
     rememberMe: boolean;
     error?: string;
 }
-export type ActionsProfileType = ReturnType<typeof setUserDataAC>
+export type ActionsProfileType = ReturnType<typeof setUserData> | ReturnType<typeof unsetUserData>

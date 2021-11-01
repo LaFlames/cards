@@ -20,40 +20,42 @@
     line-height: 33px;
     color: #2D2E46;
     margin-top: 0;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
-  &_emailInput {
+  &_emailInput, &_passwordInput {
     &-title {
       font-family: Poppins;
       font-size: 13px;
       line-height: 20px;
       color: #24254A;
       opacity: 0.5;
+    }
+    div {
+      input {
+        width: 270px;
+      }
     }
   }
   &_passwordInput {
     margin-top: 20px;
-    &-title {
-      font-family: Poppins;
-      font-size: 13px;
-      line-height: 20px;
-      color: #24254A;
-      opacity: 0.5;
-    }
   }
   &_forgetPassword {
     margin-top: 40px;
-    margin-left: 95px;
+    margin-left: 120px;
     font-size: 14px;
     line-height: 17px;
     color: #2D2E46;
     cursor: pointer;
     text-decoration: none;
+    &:hover {
+      color: darkslateblue;
+      font-weight: 600;
+    }
   }
   &_button {
     margin-top: 50px;
     button {
-      width: 150px;
+      width: 180px;
     }
   }
   &_dontHaveAcc {
@@ -66,10 +68,6 @@
   }
   &_signUp {
     margin-top: 15px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #21268F;
   }
   &_loading {
     position: absolute;
@@ -77,8 +75,9 @@
   }
   &_errorMessage {
     position: absolute;
+    font-family: Poppins;
+    font-size: 13px;
     top: 46%;
     color: red;
-    font-size: 15px;
   }
 }

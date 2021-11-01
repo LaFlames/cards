@@ -1,6 +1,6 @@
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
 import {loginAPI} from "../../app/app-api";
-
+import {unsetUserData} from "../Profile/profile-reducer";
 
 
 const loginInitialState: LoginInitialStateType = {
@@ -82,6 +82,7 @@ export const logoutUserTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data) {
                 dispatch(setIsAuth(false))
+                dispatch(unsetUserData())
             }
         })
 }

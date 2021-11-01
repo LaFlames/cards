@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect} from 'react'
 import s from './PasswordRecovery.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppRootStateType } from '../../app/store'
-import { SuperButton } from '../SuperComponents/SuperButton/SuperButton'
-import { SuperInputText } from '../SuperComponents/SuperInputText/SuperInputText'
-import { PasswordRecoveryInitialStateType, setEmailForPasswordTC, setErrorMessageAC, setIsPasswordRecoverySucceededAC, setPasswordRecoveryAC } from './passwordRecovery-reducer'
-import { NavLink } from 'react-router-dom'
-import { eMailValidation } from '../../utilites/validator'
-import { SuccessfulMessage } from './SuccesfulMessage'
-
+import {useDispatch, useSelector} from 'react-redux'
+import {AppRootStateType} from '../../app/store'
+import {SuperButton} from '../SuperComponents/SuperButton/SuperButton'
+import {SuperInputText} from '../SuperComponents/SuperInputText/SuperInputText'
+import {
+    PasswordRecoveryInitialStateType,
+    setEmailForPasswordTC,
+    setErrorMessageAC,
+    setIsPasswordRecoverySucceededAC,
+    setPasswordRecoveryAC
+} from './passwordRecovery-reducer'
+import {eMailValidation} from '../../utilites/validator'
+import {SuccessfulMessage} from './SuccesfulMessage/SuccesfulMessage'
+import {PATH} from "../Routes";
+import {CustomNavLink} from "../SuperComponents/CustomNavLink/CustomNavlink";
 
 
 export const PasswordRecovery = () => {
@@ -37,14 +43,14 @@ export const PasswordRecovery = () => {
         dispatch(setErrorMessageAC(''))
         e.preventDefault()
         if (eMailValidation(email) || email.length === 0) {
-            dispatch(setErrorMessageAC('Email address is not valide'))
+            dispatch(setErrorMessageAC('Email address is not valid'))
         } else {
             dispatch(setEmailForPasswordTC(state))
         }
     }
 
     if (isRequestSucceeded) {
-        return <SuccessfulMessage />
+        return <SuccessfulMessage email={email}/>
     }
 
     return (
@@ -68,7 +74,7 @@ export const PasswordRecovery = () => {
             
             <p className={s.secondInfo}>Did you remember your password?</p>
             <div className={s.loginRedirect}>
-                <NavLink to='/login'>login</NavLink>
+                <CustomNavLink to={PATH.LOGIN} title={"Login"}/>
             </div>
         </div>
     )

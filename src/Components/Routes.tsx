@@ -35,7 +35,7 @@ function Routes() {
                 <Route path={PATH.PACKS} render={() => <PacksDima/>}/>
                 <Route path={PATH.CARDS} render={() => <Cards/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
-                <Route path={PATH.ENTER_NEW_PASSWORD} render={() => <EnterNewPassword/>}/>
+                <Route path={`${PATH.ENTER_NEW_PASSWORD}/:token`} render={() => <EnterNewPassword/>}/>
 
                 <Route render={() => <Error404/>}/>
             </Switch>
