@@ -19,8 +19,8 @@ export const Login = () => {
     let errorMessage = useSelector<AppRootStateType, string>(state => state.login.errorMessage)
     let userProfile = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
 
-    let [email, setEmail] = useState<string>("")
-    let [password, setPassword] = useState<string>("")
+    let [email, setEmail] = useState<string>("nya-admin@nya.nya")
+    let [password, setPassword] = useState<string>("1qazxcvBG")
 
     useEffect(() => {
         return () => {
@@ -55,7 +55,9 @@ export const Login = () => {
                 <div>
                     <SuperInputText
                         onChangeText={onChangeEmail}
-                        type="email"/>
+                        type="email"
+                        value={email}
+                    />
                 </div>
             </div>
             <div className="login_passwordInput">
@@ -63,7 +65,9 @@ export const Login = () => {
                 <div>
                     <SuperInputText
                         onChangeText={onChangePassword}
-                        type="password"/>
+                        type="password"
+                        value={password}
+                    />
                 </div>
             </div>
             <NavLink to={PATH.PASSWORD_RECOVERY} className="login_forgetPassword">Forgot password?</NavLink>
