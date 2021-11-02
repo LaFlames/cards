@@ -6,7 +6,7 @@ import { ProfileInitialStateType } from '../Profile/profile-reducer'
 import {Redirect} from "react-router-dom";
 import { PATH } from '../Routes'
 import SuperSelect from '../SuperComponents/SuperSelect/SuperSelect'
-import { editPackTC, PackType, removePackTC, setCurrentPageAC, setPacksTC, setPageCountAC, setSearchPacksAC } from './packs-reducer'
+import { editPackTC, PackType, removePackTC, setCurrentPackIdAC, setCurrentPageAC, setPacksTC, setPageCountAC, setSearchPacksAC } from './packs-reducer'
 import { setCardsPackIdAC, setCardsTC } from '../Cards/cards-reducer'
 import { useHistory } from "react-router-dom";
 
@@ -28,6 +28,9 @@ export const Packs = () => {
     useEffect(() => {
         dispatch(setPacksTC())
     }, [])
+
+    const getLocalTime = (value: Date | string) =>
+        new Intl.DateTimeFormat().format(new Date(value));
 
     const onChangePageHandler = useCallback(
         (pageNumber: number) => {
@@ -58,7 +61,8 @@ export const Packs = () => {
         }
 
         const LearnHandler = () => {
-            dispatch(setCardsTC(el._id))
+            // dispatch(setCardsTC(el._id))
+            dispatch(setCurrentPackIdAC(el._id))
             history.push(PATH.CARDS);
         }
 
@@ -66,7 +70,7 @@ export const Packs = () => {
             <tr key={el._id} className={'tr2'}>
                 <td className={'td1'}> {el.name} </td>
                 <td className={'td1'}> {el.cardsCount} </td>
-                <td className={'td1'}> {el.updated} </td>
+                <td className={'td1'}> {getLocalTime(el.updated)} </td>
                 <td className={'td1'}> {el.user_name} </td>
                 <td className={'td2'}>
                     {el.user_id === userProfile._id && <button onClick={removePack}>Delete</button>}
@@ -106,7 +110,7 @@ export const Packs = () => {
                     </tr>
                     {mappedPositions}
                 </table>
-            </div>
+            </div>          
 
             <Paginator 
                     currentItem={currentPage}

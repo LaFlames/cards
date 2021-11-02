@@ -48,6 +48,11 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
                 ...state,
                 pageCount: action.pageCount,
             };
+        case "packs/SET-CURRENT-PACK-ID": 
+            return {
+                ...state,
+                packsId: action.payload.packId,
+            }
         default:
             return state
     }
@@ -68,6 +73,14 @@ export const setCurrentPageAC = (currentPage: number) => {
 };
 export const setPageCountAC = (pageCount: number) => {
     return { type: "packs/SET-PAGE-COUNT", pageCount } as const;
+};
+export const setCurrentPackIdAC = (packId: string) => {
+    return {
+        type: "packs/SET-CURRENT-PACK-ID",
+        payload: {
+            packId,
+        },
+    } as const;
 };
 
 //thunk
@@ -126,6 +139,7 @@ export type ActionsPacksType =
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setPacksTotalCountAC>
     | ReturnType<typeof setPageCountAC>
+    | ReturnType<typeof setCurrentPackIdAC>
 
 export type PacksInitialStateType = {
     cardPacks: PackType[];

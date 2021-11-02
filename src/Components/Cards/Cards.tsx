@@ -7,11 +7,14 @@ import { CardType, setCardsTC } from './cards-reducer'
 
 export const Cards = () => {
     const dispatch = useDispatch()
+    const packId = useSelector<AppRootStateType, string>(state => state.packs.packsId)
     const cards = useSelector<AppRootStateType, CardType[]>(state => state.cards.cards)
+    const getLocalTime = (value: Date | string) =>
+        new Intl.DateTimeFormat().format(new Date(value));
 
-    // useEffect(() => {
-    //     dispatch(setCardsTC())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(setCardsTC(packId))
+    }, [dispatch])
 
     const mappedPositions = cards.map((el) => {
 
@@ -21,7 +24,7 @@ export const Cards = () => {
                 <td className={'td1'}> {el.answer} </td>
                 <td className={'td1'}> {el.grade} </td>
                 <td className={'td1'}> {el.question} </td>
-                <td className={'td1'}> {el.updated} </td>
+                <td className={'td1'}> {getLocalTime(el.updated)} </td>
                 <td className={'td2'}>
                 </td>
             </tr>
@@ -45,4 +48,6 @@ export const Cards = () => {
         </div>
     )
 }
+
+
 
