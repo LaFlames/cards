@@ -75,7 +75,7 @@ export const Packs = () => {
                 <td className={'td2'}>
                     {el.user_id === userProfile._id && <button onClick={removePack}>Delete</button>}
                     {el.user_id === userProfile._id && <button onClick={editPack}>Edit</button>}
-                    <button onClick={LearnHandler}>Learn</button>
+                    <button disabled={el.cardsCount === 0} onClick={LearnHandler}>Learn</button>
                 </td>
             </tr>
         )

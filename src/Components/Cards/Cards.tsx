@@ -1,50 +1,74 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { AppRootStateType } from '../../app/store'
+import { PackType } from '../Packs/packs-reducer'
 import { CardType, setCardsTC } from './cards-reducer'
+import s from './Cards.module.css'
 
 
 
 export const Cards = () => {
     const dispatch = useDispatch()
     const packId = useSelector<AppRootStateType, string>(state => state.packs.packsId)
+    const cardsPack = useSelector<AppRootStateType, PackType[]>(state => state.packs.cardPacks)
     const cards = useSelector<AppRootStateType, CardType[]>(state => state.cards.cards)
-    const getLocalTime = (value: Date | string) =>
-        new Intl.DateTimeFormat().format(new Date(value));
+    const [currentCard, setCurrentCard] = useState<CardType>({
+        _id: "",
+        cardsPack_id: "",
+        answer: "answer fake",
+        question: "question fake",
+        grade: 0,
+        shots: 0,
+        rating: 0,
+        updated: "",
+    })
+    const [isChecked, setIsChecked] = useState<boolean>(false)
+    const [isViewed, setIsViewed] = useState<boolean>(false)
+    const currentPack = cardsPack.filter(p => p._id === packId)
+    const history = useHistory()
+    
+    
 
     useEffect(() => {
         dispatch(setCardsTC(packId))
     }, [dispatch])
+    
+    useEffect(() => {
+        setCurrentCard(cards[0])
+    }, [cards])
 
-    const mappedPositions = cards.map((el) => {
+    const index = cards.indexOf(currentCard)
 
+    const onNextButtonHandler = () => {
+        if (isChecked) {
+            if (cards.length === index + 1) {
+                setIsViewed(true)
+            } else {
+            setCurrentCard(cards[index + 1])
+            setIsChecked(false)
+            }
+        } else {
+            setIsChecked(true)
+        }
+    }
 
-        return (
-            <tr key={el._id} className={'tr2'}>
-                <td className={'td1'}> {el.answer} </td>
-                <td className={'td1'}> {el.grade} </td>
-                <td className={'td1'}> {el.question} </td>
-                <td className={'td1'}> {getLocalTime(el.updated)} </td>
-                <td className={'td2'}>
-                </td>
-            </tr>
-        )
-    })
+    if (isViewed) {
+        return <div className={s.wrapper}>
+            <span>ok</span>
+            <button onClick={() => {history.goBack()}}>cancel</button>
+        </div>
+    }
 
     return (
-        <div>
-            <div className={'tableWrapper'}>
-                <table>
-                    <tr className={'tr1'}>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                    </tr>
-                    {mappedPositions}
-                </table>
-            </div>
+        <div className={s.wrapper}>
+            <h2>Learn: {currentPack[0].name}</h2>
+            <h3>Question: {currentCard.question}</h3>
+            {isChecked && <h3>Answer: {currentCard.answer}</h3>}
+
+            <button onClick={onNextButtonHandler}>next</button>
+            <button onClick={() => {history.goBack()}}>cancel</button>
+
         </div>
     )
 }
