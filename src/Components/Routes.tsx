@@ -9,6 +9,7 @@ import {PasswordRecovery} from "./PasswordRecovery/PasswordRecovery";
 import {EnterNewPassword} from "./EnterNewPassword/EnterNewPassword";
 import {Cards} from './Cards/Cards';
 import { Packs } from './Packs/Packs';
+import {LearnCards} from "./Cards/LearnCards";
 
 
 export const PATH = {
@@ -20,6 +21,7 @@ export const PATH = {
     ENTER_NEW_PASSWORD: '/add-new-password',
     PACKS: '/packs',
     CARDS: '/cards',
+    LEARN_CARDS: '/learn-cards'
 }
 
 function Routes() {
@@ -34,6 +36,7 @@ function Routes() {
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.PACKS} render={() => <Packs/>}/>
                 <Route path={PATH.CARDS} render={() => <Cards/>}/>
+                <Route path={PATH.LEARN_CARDS} render={() => <LearnCards/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
                 <Route path={`${PATH.ENTER_NEW_PASSWORD}/:token`} render={() => <EnterNewPassword/>}/>
 

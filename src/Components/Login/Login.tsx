@@ -37,7 +37,7 @@ export const Login = () => {
         setPassword(value)
     }
     const loginUserHandler = () => {
-        dispatch(loginUserTC(email, password, false))
+        dispatch(loginUserTC(email, password, true))
     }
 
 

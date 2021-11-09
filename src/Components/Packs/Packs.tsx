@@ -63,25 +63,34 @@ export const Packs = () => {
         const LearnHandler = () => {
             // dispatch(setCardsTC(el._id))
             dispatch(setCurrentPackIdAC(el._id))
+            history.push(PATH.LEARN_CARDS);
+        }
+
+        const goToCardsList = () => {
+            dispatch(setCurrentPackIdAC(el._id))
             history.push(PATH.CARDS);
         }
 
         return (
             <tr key={el._id} className={'tr2'}>
-                <td className={'td1'}> {el.name} </td>
+                <td
+                    className={'td1'}
+                    style={el.user_id === userProfile._id ? {cursor: 'pointer', color: 'deeppink'} : {cursor: 'default'}}
+                    onClick={el.user_id === userProfile._id ? goToCardsList : () => {}}
+                > {el.name} </td>
                 <td className={'td1'}> {el.cardsCount} </td>
                 <td className={'td1'}> {getLocalTime(el.updated)} </td>
                 <td className={'td1'}> {el.user_name} </td>
                 <td className={'td2'}>
                     {el.user_id === userProfile._id && <button onClick={removePack}>Delete</button>}
                     {el.user_id === userProfile._id && <button onClick={editPack}>Edit</button>}
-                    <button onClick={LearnHandler}>Learn</button>
+                    <button disabled={el.cardsCount === 0} onClick={LearnHandler}>Learn</button>
                 </td>
             </tr>
         )
     })
 
-    if (!isAuth) {
+    if (!userProfile._id) {
         return <Redirect to={PATH.LOGIN}/>
     }
 

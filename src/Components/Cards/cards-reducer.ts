@@ -103,6 +103,12 @@ export const setCardsTC =
             })
     };
 
+export const updateCardsGradesTC =
+    (card_id: string, grade: number): ThunkType =>
+        (dispatch, getState: () => AppRootStateType) => {
+            cardsAPI.updateCardGrade(card_id, grade)
+        };
+
 
 // Types
 export type ActionsCardsTypes =
