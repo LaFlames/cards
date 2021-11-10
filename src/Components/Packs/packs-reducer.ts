@@ -1,7 +1,7 @@
 import { AppRootStateType, ThunkType } from "../../app/store"
 import { packsAPI } from "./packs-api"
 
-const initialState: PacksInitialStateType = {
+const initialState: PacksInitialStateType  = {
     cardPacks: [
         {
             _id: "",
@@ -11,6 +11,7 @@ const initialState: PacksInitialStateType = {
             name: "",
             cardsCount: 0,
             updated: new Date(),
+            editableFlag: 'idle',
         },
     ],
     minCardsCount: 0,
@@ -27,7 +28,8 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
     switch (action.type) {
         case 'packs/SET-PACKS': {
             return {
-                ...state, 
+                ...state,
+               // cardPacks: action.cardPacks
                 cardPacks: action.cardPacks
             }
         }
@@ -53,12 +55,18 @@ export const packsReducer = (state = initialState, action: ActionsPacksType): Pa
                 ...state,
                 packsId: action.payload.packId,
             }
+        case "packs/SET-EDITABLE-FLAG":
+            return {...state, cardPacks: state.cardPacks
+                    .map(el => el._id === action.packID ? {...el, editableFlag: action.editableFlag} : el)}
         default:
             return state
     }
 }
 
-// Action 
+// Action
+export const setEditableFlag = (editableFlag: EditableFlagTypes, packID: string) => {
+    return {type: "packs/SET-EDITABLE-FLAG", editableFlag, packID} as const
+};
 export const setPacksAC = (cardPacks: PackType[]) => {
     return { type: "packs/SET-PACKS", cardPacks } as const;
 };
@@ -104,7 +112,7 @@ export const  setPacksTC = (): ThunkType => (dispatch, getState: () => AppRootSt
         maxCardsCount
     )
         .then(res => {
-            dispatch(setPacksAC(res.data.cardPacks))
+            dispatch(setPacksAC(res.data.cardPacks.map(el => ({...el, editableFlag: 'idle'}))))
             dispatch(setPacksTotalCountAC(res.data.cardPacksTotalCount));
         })
 }
@@ -131,9 +139,19 @@ export const editPackTC = (
         })
 }
 
+export const createPackTC = (
+     name: string
+): ThunkType => (dispatch, getState: () => AppRootStateType) => {
+    packsAPI.createCardsPack({name})
+        .then(() => {
+            dispatch(setPacksTC())
+        })
+}
+
 //types
 
 export type ActionsPacksType = 
+    | ReturnType<typeof setEditableFlag>
     | ReturnType<typeof setPacksAC>
     | ReturnType<typeof setSearchPacksAC>
     | ReturnType<typeof setCurrentPageAC>
@@ -161,4 +179,7 @@ export type PackType = {
     name: string;
     cardsCount: 0;
     updated: Date;
+    editableFlag: EditableFlagTypes
 };
+
+export type EditableFlagTypes = 'idle' | 'edit' | 'remove'

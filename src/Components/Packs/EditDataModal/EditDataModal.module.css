@@ -1,0 +1,33 @@
+.editionModalContainer {
+    border: 1px solid yellowgreen;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    position: absolute;
+    padding: 20px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.borderFrame {
+    padding: 20px 0;
+    background-color: #f2f5f8;
+    width: 250px;
+}
+
+.headerStyles {
+    margin: 0;
+}
+
+.editionModalWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remoteWrapper {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
