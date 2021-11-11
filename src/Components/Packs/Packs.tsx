@@ -84,6 +84,11 @@ export const Packs = () => {
 
         const LearnHandler = () => {
             dispatch(setCurrentPackIdAC(el._id))
+            history.push(PATH.LEARN_CARDS);
+        }
+
+        const goToCardsList = () => {
+            dispatch(setCurrentPackIdAC(el._id))
             history.push(PATH.CARDS);
         }
 
@@ -91,8 +96,6 @@ export const Packs = () => {
             <tr key={el._id} className={'tr2'} >
                 {el.editableFlag === 'edit' && <EditDataModal id={el._id} />}
                 {el.editableFlag === 'remove' && <RemoveDataModal id={el._id} />}
-                <td className={'td1'}> {el.name} </td>
-            <tr key={el._id} className={'tr2'}>
                 <td
                     className={'td1'}
                     style={el.user_id === userProfile._id ? {cursor: 'pointer', color: 'deeppink'} : {cursor: 'default'}}
