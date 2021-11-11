@@ -19,9 +19,9 @@ export const packsAPI = {
   rmPacks(id: string) {
     return instance.delete<RemovePackResponse>(`/cards/pack?id=${id}`)
   },
-  // createCardsPack(payload: { name: string }) {
-  //     return instance.post(`/cards/pack`, {cardsPack: payload})
-  // },
+  createCardsPack(payload: { name: string }) {
+      return instance.post(`/cards/pack`, {cardsPack: payload})
+  },
   editPack(payload: {_id: string, name: string | null}) {
     return instance.put<UpdateResponseType>(`/cards/pack`, {cardsPack: payload})
   }
@@ -75,6 +75,7 @@ export type PacksResponseType = {
   minCardsCount: number;
   maxCardsCount: number;
   token: string;
+  user_name: string;
 };
 export type RemovePackResponse = {
   deletedCardsPack: CardsPackType[]
